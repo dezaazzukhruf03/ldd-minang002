@@ -523,13 +523,14 @@ body.no-scroll {
 .section {
     padding: 50px 20px;
     position: relative;
-    opacity: 0;
-    transition: opacity 0.8s ease;
     color: var(--white);
+    /* opacity dihapus — background section selalu solid,
+       animasi reveal ditangani elemen di dalamnya (lihat animasi.css) */
 }
 
 .section.in-view {
-    opacity: 1;
+    /* class ini tetap dipakai sebagai trigger animasi anak-anaknya
+       (section-header, story-card, dst di animasi.css), jangan dihapus dari JS */
 }
 
 /* ==========================================================================
@@ -639,7 +640,7 @@ body.no-scroll {
     min-height: 100svh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     padding: 40px 24px 50px;
     text-align: center;
