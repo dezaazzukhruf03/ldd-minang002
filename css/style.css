@@ -504,7 +504,7 @@ body.no-scroll {
 }
 
 .foto-utama .photo-frame {
-    margin-top: 20px;
+    margin-top: 0px;
     width: 200px;
     height: 300px;
     z-index: 5;
