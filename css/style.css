@@ -111,8 +111,6 @@ body.no-scroll {
 .cover-screen {
     position: fixed;
     top: 0;
-    left: 50%;
-    transform: translateX(-50%);
     width: 100%;
     max-width: 450px;
     height: 100dvh;
@@ -259,7 +257,7 @@ body.no-scroll {
 
 .cover-edge-rumah-adat {
     position: absolute;
-    top: 620px;
+    top: 610px;
     height: auto;
     width: 450px;
     object-fit: cover;
