@@ -14,6 +14,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const guestParam = urlParams.get('to');
     const guestNameEl = document.getElementById('guest-name');
+    const guestBoxEl = document.getElementById('guest-box');
+
+    // Tampilkan kotak "Kepada Yth." hanya jika link mengandung ?to=NamaTamu
+    if (guestParam && guestNameEl) {
+        const cleanName = decodeURIComponent(guestParam.replace(/\+/g, ' ')).trim();
+        if (cleanName) {
+            guestNameEl.textContent = cleanName;
+            if (guestBoxEl) guestBoxEl.classList.remove('hide-guest-box');
+        }
+    }
 
     const btnOpen = document.getElementById('btn-open-invitation');
     const coverScreen = document.getElementById('cover-screen');

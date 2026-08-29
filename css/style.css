@@ -111,6 +111,8 @@ body.no-scroll {
 .cover-screen {
     position: fixed;
     top: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
     max-width: 450px;
     height: 100dvh;
@@ -337,6 +339,12 @@ body.no-scroll {
     margin: 20px 0;
 }
 
+/* Kotak nama tamu ini disembunyikan secara default, dan hanya
+   ditampilkan lewat JS (script.js) saat link punya parameter ?to=Nama */
+.guest-box.hide-guest-box {
+    display: none;
+}
+
 .guest-label {
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.8);
@@ -486,19 +494,16 @@ body.no-scroll {
 }
 
 .foto-utama {
-    top: -200px;
   position: relative;
   z-index: 10;
 }
 
 .foto-utama .photo-frame {
-    top: 130px;
-    left: 28%;
-    position: fixed;
-  width: 200px;
-  height: 300px;
-  z-index: 5;
-  opacity: 100%;
+    margin-top: 20px;
+    width: 200px;
+    height: 300px;
+    z-index: 5;
+    opacity: 100%;
 }
 
 .bride-groom-text-beranda {
@@ -531,45 +536,39 @@ body.no-scroll {
    Format: linear-gradient(sudut, warna-atas, warna-tengah, warna-bawah)
    ========================================================================== */
 
-/* Cover Screen */
-.cover-bg {
-    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 50%, #0f172a 100%);
-}
-
 /* Beranda / Cover (foto utama) */
 .hero-section {
-    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 50%, #0f172a 100%);
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
 }
 
 /* Pasangan Mempelai */
 .mempelai-section {
-    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 0%, #0f172a 100%);
-    
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
 }
 
 /* Kisah Cinta Kami */
 .story-section {
-    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 0%, #0f172a 100%);
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
 }
 
 /* Rangkaian Acara */
 .acara-section {
-    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 0%, #0f172a 100%);
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
 }
 
 /* Galeri Foto */
 .galeri-section {
-    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 0%, #0f172a 100%);
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
 }
 
 /* Hadiah Digital */
 .gift-section {
-    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 0%, #0f172a 100%);
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
 }
 
 /* RSVP & Ucapan */
 .rsvp-section {
-    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 0%, #0f172a 100%);
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
 }
 
 .section-header {
@@ -596,6 +595,40 @@ body.no-scroll {
 }
 
 .text-center { text-align: center; }
+
+/* --------------------------------------------------------------------------
+   Foto Dekorasi Kiri & Kanan (tampil di setiap section)
+   -------------------------------------------------------------------------- */
+.section-photo-decor {
+    position: absolute;
+    top: 28px;
+    width: 78px;
+    height: 104px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid var(--white);
+    box-shadow: 0 6px 16px rgba(128, 0, 0, 0.3);
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+.section-photo-decor img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.section-photo-decor.pos-left {
+    left: -22px;
+    transform: rotate(-10deg);
+}
+
+.section-photo-decor.pos-right {
+    right: -22px;
+    transform: rotate(10deg);
+}
 
 /* Hero Section - Full Screen Cover Photo */
 .hero-section {
@@ -676,7 +709,7 @@ body.no-scroll {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid rgba(255, 40, 0, 0.2);
+    border: 1px solid rgba(128, 0, 0, 0.25);
 }
 
 .countdown-item span {
@@ -784,21 +817,22 @@ body.no-scroll {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 40px;
+  gap: 16px;
   margin-top: 32px;
   position: relative;
   z-index: 10;
 }
 
 .groom-card, .bride-card {
-    top: 0px;
-  width: 200px;
-  height: 450px;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 170px;
+  height: auto;
 }
 
 .photo-frame {
   width: 100%;
-  height: 300px;
+  height: 240px;
   border-radius: 160px 160px 20px 20px;
   overflow: hidden;
   margin-bottom: 16px;
@@ -905,7 +939,7 @@ body.no-scroll {
     border-radius: var(--border-radius);
     text-align: center;
     box-shadow: var(--shadow-card);
-    border: 1px solid rgba(255, 40, 0, 0.2);
+    border: 1px solid rgba(128, 0, 0, 0.2);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -969,8 +1003,8 @@ body.no-scroll {
 }
 
 .btn-secondary {
-    background: var(--white);
-    color: var(--primary-color);
+    background: var(--primary-color);
+    color: var(--white);
     border: 1px solid var(--primary-color);
     padding: 10px 20px;
     border-radius: 25px;
@@ -997,8 +1031,8 @@ body.no-scroll {
         transform: translateY(-1px);
     }
     .btn-secondary:hover {
-        background: var(--primary-color);
-        color: var(--white);
+        background: var(--accent-dark);
+        border-color: var(--accent-dark);
         transform: translateY(-1px);
     }
 }

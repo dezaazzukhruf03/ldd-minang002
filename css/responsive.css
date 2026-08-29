@@ -45,11 +45,52 @@
         width: 56px;
         height: 76px;
     }
+
+    .couple-grid {
+        gap: 10px;
+    }
 }
 
 /* Landscape mode or Tablet/Desktop wrapper styling */
 @media screen and (min-width: 451px) {
     body {
         background-color: #0b1329;
+        /* Sebelumnya "center" — sekarang kartu HP digeser ke kanan layar laptop */
+        justify-content: flex-end;
+        padding-right: 60px;
+    }
+
+    /* margin:0 auto pada .mobile-wrapper (di style.css) membuatnya tetap
+       "auto-center" walau parent flex sudah diset flex-end, jadi di-reset
+       di sini supaya benar-benar nempel kanan */
+    .mobile-wrapper {
+        margin: 0;
+    }
+
+    /* Cover screen pakai position:fixed (relatif ke viewport, bukan ke
+       .mobile-wrapper), jadi harus disamakan posisinya secara manual
+       supaya tetap pas menutupi .mobile-wrapper yang sudah digeser kanan */
+    .cover-screen {
+        left: auto;
+        right: 60px;
+        transform: none;
+    }
+
+    .cover-screen.opened {
+        transform: translateY(-100%);
+    }
+
+    .floating-nav {
+        left: auto;
+        right: 60px;
+        transform: none;
+    }
+
+    .floating-nav.hide-nav {
+        transform: translateY(20px);
+    }
+
+    .music-floating-container {
+        right: calc(60px + 15px);
     }
 }
