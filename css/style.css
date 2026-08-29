@@ -259,7 +259,7 @@ body.no-scroll {
 
 .cover-edge-rumah-adat {
     position: absolute;
-    top: 600px;
+    top: 620px;
     height: auto;
     width: 450px;
     object-fit: cover;
@@ -599,40 +599,6 @@ body.no-scroll {
 
 .text-center { text-align: center; }
 
-/* --------------------------------------------------------------------------
-   Foto Dekorasi Kiri & Kanan (tampil di setiap section)
-   -------------------------------------------------------------------------- */
-.section-photo-decor {
-    position: absolute;
-    top: 28px;
-    width: 78px;
-    height: 104px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 3px solid var(--white);
-    box-shadow: 0 6px 16px rgba(128, 0, 0, 0.3);
-    z-index: -1;
-    pointer-events: none;
-    opacity: 0.9;
-}
-
-.section-photo-decor img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.section-photo-decor.pos-left {
-    left: -22px;
-    transform: rotate(-10deg);
-}
-
-.section-photo-decor.pos-right {
-    right: -22px;
-    transform: rotate(10deg);
-}
-
 /* Hero Section - Full Screen Cover Photo */
 .hero-section {
     position: relative;
@@ -750,6 +716,7 @@ body.no-scroll {
 .mempelai-edge-jam-gadang {
     position: absolute;
     top: -10px;
+    left: 11%;
     height: auto;
     width: 350px;
     object-fit: cover;
@@ -827,8 +794,8 @@ body.no-scroll {
 
 .groom-card, .bride-card {
     top: 0px;
-  width: 100%;
-  height: 300px;
+  width: 200px;
+  height: 450px;
 }
 
 .photo-frame {
