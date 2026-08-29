@@ -56,7 +56,7 @@
     :root {
         /* Satu sumber angka jarak kanan, dipakai semua elemen di bawah,
            supaya tidak mungkin ada yang "meleset" beda angka */
-        --desktop-gutter: 60px;
+        --desktop-gutter: 0px;
     }
 
     body {

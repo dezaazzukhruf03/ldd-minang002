@@ -259,7 +259,7 @@ body.no-scroll {
 
 .cover-edge-rumah-adat {
     position: absolute;
-    top: 610px;
+    bottom: 0;
     height: auto;
     width: 450px;
     object-fit: cover;
