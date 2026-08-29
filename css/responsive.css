@@ -53,26 +53,32 @@
 
 /* Landscape mode or Tablet/Desktop wrapper styling */
 @media screen and (min-width: 451px) {
+    :root {
+        /* Satu sumber angka jarak kanan, dipakai semua elemen di bawah,
+           supaya tidak mungkin ada yang "meleset" beda angka */
+        --desktop-gutter: 60px;
+    }
+
     body {
         background-color: #0b1329;
         /* Sebelumnya "center" — sekarang kartu HP digeser ke kanan layar laptop */
         justify-content: flex-end;
-        padding-right: 60px;
+        padding-right: 0;
     }
 
     /* margin:0 auto pada .mobile-wrapper (di style.css) membuatnya tetap
        "auto-center" walau parent flex sudah diset flex-end, jadi di-reset
-       di sini supaya benar-benar nempel kanan */
+       di sini supaya benar-benar nempel kanan dengan jarak --desktop-gutter */
     .mobile-wrapper {
-        margin: 0;
+        margin: 0 var(--desktop-gutter) 0 0;
     }
 
-    /* Cover screen pakai position:fixed (relatif ke viewport, bukan ke
-       .mobile-wrapper), jadi harus disamakan posisinya secara manual
-       supaya tetap pas menutupi .mobile-wrapper yang sudah digeser kanan */
+    /* Elemen position:fixed di bawah ini posisinya relatif ke VIEWPORT,
+       bukan ke .mobile-wrapper, jadi harus disamakan manual pakai variabel
+       yang sama supaya tetap pas menutupi .mobile-wrapper yang digeser kanan */
     .cover-screen {
         left: auto;
-        right: 60px;
+        right: var(--desktop-gutter);
         transform: none;
     }
 
@@ -82,7 +88,7 @@
 
     .floating-nav {
         left: auto;
-        right: 60px;
+        right: var(--desktop-gutter);
         transform: none;
     }
 
@@ -91,6 +97,6 @@
     }
 
     .music-floating-container {
-        right: calc(60px + 15px);
+        right: calc(var(--desktop-gutter) + 15px);
     }
 }

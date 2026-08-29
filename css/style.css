@@ -53,7 +53,7 @@ body.no-scroll {
     width: 100%;
     max-width: 450px;
     min-height: 100dvh;
-    background-color: var(--bg-light);
+    background-color: #0f172a;
     position: relative;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
     overflow: hidden;
@@ -332,9 +332,10 @@ body.no-scroll {
 .guest-box {
     backdrop-filter: blur(10px);
     border: 1px solid var(--gold);
-    padding: 20px;
+    padding: 16px 20px;
     border-radius: var(--border-radius);
-    height: 100px;
+    height: auto;
+    min-height: 90px;
     width: 300px;
     margin: 20px 0;
 }
@@ -359,7 +360,7 @@ body.no-scroll {
 }
 
 .guest-note {
-    margin-top: 15%;
+    margin-top: 8px;
     font-size: 0.5rem;
     color: rgba(255, 255, 255, 0.7);
     font-style: italic;
@@ -496,6 +497,10 @@ body.no-scroll {
 .foto-utama {
   position: relative;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .foto-utama .photo-frame {
@@ -747,7 +752,8 @@ body.no-scroll {
 .mempelai-edge-jam-gadang {
     position: absolute;
     top: -10px;
-    left: 11%;
+    left: 50%;
+    transform: translateX(-50%);
     height: auto;
     width: 350px;
     object-fit: cover;
