@@ -1,0 +1,14 @@
+Taruh foto-foto Anda di folder ini dengan nama file berikut:
+
+1. foto-cover.png   -> foto yang muncul di oval maroon pada cover screen (layar pembuka)
+2. deco-left.png    -> foto kecil oval yang muncul di sisi KIRI setiap section
+3. deco-right.png   -> foto kecil oval yang muncul di sisi KANAN setiap section
+
+File-file lama yang sudah direferensikan di index.html (isi manual jika ada fotonya):
+- cover.png    -> background foto section Beranda (hero)
+- groom.png    -> foto mempelai pria
+- bride.png    -> foto mempelai wanita
+- gallery1.png, gallery2.png, gallery3.png, gallery4.png -> foto galeri
+
+Catatan: jika file foto belum ada, gambar akan otomatis disembunyikan (tidak error/pecah),
+kecuali cover-photo-frame yang tetap tampil sebagai oval maroon polos.

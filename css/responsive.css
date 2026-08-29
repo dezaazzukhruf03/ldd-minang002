@@ -1,0 +1,55 @@
+/* ==========================================================================
+   RESPONSIVE.CSS - Breakpoint Tweaks for Screen Sizes
+   Note: High focus on strictly keeping card proportions inside .mobile-wrapper
+   ========================================================================== */
+
+/* Very Small Mobile Screens (< 360px) */
+@media screen and (max-width: 360px) {
+    .bride-groom-title {
+        font-size: 3rem;
+    }
+    
+    .section-title-script {
+        font-size: 2.8rem;
+    }
+
+    .countdown-item {
+        width: 52px;
+        height: 52px;
+    }
+
+    .countdown-item span {
+        font-size: 1.1rem;
+    }
+
+    .nav-pill {
+        gap: 10px;
+        padding: 6px 12px;
+    }
+
+    .nav-item {
+        font-size: 0.95rem;
+    }
+
+    .cover-oval-card {
+        width: 92%;
+        min-height: 420px;
+        border-radius: 120px;
+    }
+
+    .cover-oval-text {
+        padding: 60px 18px 36px;
+    }
+
+    .section-photo-decor {
+        width: 56px;
+        height: 76px;
+    }
+}
+
+/* Landscape mode or Tablet/Desktop wrapper styling */
+@media screen and (min-width: 451px) {
+    body {
+        background-color: #0b1329;
+    }
+}

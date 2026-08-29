@@ -1,0 +1,303 @@
+/* Blinking Animation for Preloader */
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.2; }
+    100% { opacity: 1; }
+}
+
+.blink-text {
+    animation: blink 1.2s infinite ease-in-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes pulse {
+    0%   { transform: scale(1); box-shadow: 0 0 0 0 rgba(128, 0, 0, 0.35); }
+    70%  { transform: scale(1.04); box-shadow: 0 0 0 14px rgba(128, 0, 0, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(128, 0, 0, 0); }
+}
+
+.pulse {
+    animation: pulse 2s infinite ease-in-out;
+}
+
+@keyframes bounceIn {
+    0% { opacity: 0; transform: scale(0.3); }
+    50% { opacity: 0.9; transform: scale(1.05); }
+    80% { transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+.bounce-in {
+    animation: bounceIn 0.8s ease forwards;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.fa-spin-music {
+    animation: spin 3s linear infinite;
+}
+
+@keyframes float {
+    0%   { transform: translateY(0px) rotate(0deg); }
+    50%  { transform: translateY(-10px) rotate(4deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.flower-decor {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 10 C55 25 70 25 70 40 C70 55 55 55 50 70 C45 55 30 55 30 40 C30 25 45 25 50 10 Z" fill="%23c5a880" opacity="0.25"/><circle cx="50" cy="40" r="8" fill="%23d4af37" opacity="0.4"/></svg>') no-repeat center/contain;
+    pointer-events: none;
+    z-index: 10;
+    animation: float 6s ease-in-out infinite;
+}
+
+.flower-decor.top-left { top: 20px; left: -20px; }
+.flower-decor.top-right { top: 20px; right: -20px; transform: scaleX(-1); }
+
+
+/* ==========================================================================
+   ENHANCED ANIMATIONS — Scroll Reveal, Stagger & Micro-interactions
+   Hooks into the existing .section.in-view class (already toggled by your
+   scroll-spy script) — no JS changes required.
+   ========================================================================== */
+
+/* Smoother section entrance curve */
+.section {
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Section headers rise in first */
+.section-header {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.section.in-view .section-header {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Qur'an quote block */
+.quran-quote {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.section.in-view .quran-quote {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Bride & Groom cards slide in from opposite sides, ampersand pops between */
+.bride-groom-card {
+    opacity: 0;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s ease;
+}
+.couple-container .bride-groom-card:first-child { transform: translateX(-40px); }
+.couple-container .bride-groom-card:last-child { transform: translateX(40px); }
+.section.in-view .bride-groom-card {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.15s;
+}
+.section.in-view .bride-groom-card:last-child { transition-delay: 0.3s; }
+.bride-groom-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(128, 0, 0, 0.15);
+}
+
+.ampersand {
+    display: inline-block;
+    opacity: 0;
+    transform: scale(0.4) rotate(-15deg);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.section.in-view .ampersand {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    transition-delay: 0.4s;
+}
+
+/* Story cards — staggered rise, lift on hover */
+.story-card {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s ease;
+}
+.section.in-view .story-card:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.10s; }
+.section.in-view .story-card:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
+.section.in-view .story-card:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.40s; }
+.story-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(128, 0, 0, 0.15);
+}
+.story-icon {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.story-card:hover .story-icon {
+    transform: scale(1.15) rotate(-6deg);
+}
+
+/* Event cards */
+.event-card {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s ease;
+}
+.section.in-view .event-card:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.10s; }
+.section.in-view .event-card:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
+.event-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(128, 0, 0, 0.15);
+}
+
+/* Gallery — staggered pop + smoother zoom */
+.gallery-item {
+    opacity: 0;
+    transform: scale(0.85);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.section.in-view .gallery-item:nth-child(1) { opacity: 1; transform: scale(1); transition-delay: 0.05s; }
+.section.in-view .gallery-item:nth-child(2) { opacity: 1; transform: scale(1); transition-delay: 0.15s; }
+.section.in-view .gallery-item:nth-child(3) { opacity: 1; transform: scale(1); transition-delay: 0.25s; }
+.section.in-view .gallery-item:nth-child(4) { opacity: 1; transform: scale(1); transition-delay: 0.35s; }
+.gallery-item img {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Bank / gift cards — tilt-in entrance + shine sweep on hover */
+.atm-card {
+    opacity: 0;
+    transform: translateY(30px) rotateX(-8deg);
+    transition: opacity 0.7s ease,
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.section.in-view .atm-card:nth-child(1) { opacity: 1; transform: translateY(0) rotateX(0); transition-delay: 0.10s; }
+.section.in-view .atm-card:nth-child(2) { opacity: 1; transform: translateY(0) rotateX(0); transition-delay: 0.30s; }
+.atm-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.7s ease;
+    pointer-events: none;
+}
+.atm-card:hover::after { left: 130%; }
+.atm-card:hover {
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+    transform: translateY(-4px);
+}
+
+/* Buttons — shine sweep on hover/tap */
+.btn-primary, .btn-secondary, .btn-open {
+    position: relative;
+    overflow: hidden;
+}
+.btn-primary::before, .btn-secondary::before, .btn-open::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -60%;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+.btn-primary:hover::before, .btn-secondary:hover::before, .btn-open:hover::before { left: 130%; }
+
+/* Floating nav — smoother active state */
+.nav-item {
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+.nav-item:active { transform: scale(0.85); }
+.nav-item.active {
+    text-shadow: 0 0 10px rgba(128, 0, 0, 0.35);
+}
+
+/* Lightbox — smoother open/close */
+.lightbox {
+    transition: opacity 0.35s ease;
+}
+.lightbox-content {
+    transform: scale(0.9);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.lightbox.active .lightbox-content {
+    transform: scale(1);
+}
+
+/* Wish list items — entrance animation plays automatically when a new
+   ucapan is appended to the DOM, no JS class toggle needed */
+@keyframes wishIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.wish-item {
+    animation: wishIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Gentle scroll cue bounce */
+@keyframes scrollBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.6; }
+    50%      { transform: translateY(8px); opacity: 1; }
+}
+.scroll-cue {
+    animation: scrollBounce 1.8s ease-in-out infinite;
+}
+
+/* Ig link + countdown micro interactions */
+.ig-link {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+.ig-link:hover { transform: translateY(-2px); }
+
+.countdown-item {
+    transition: transform 0.3s ease;
+}
+.countdown-item:hover { transform: translateY(-3px); }
+
+/* Respect visitors who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
