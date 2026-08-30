@@ -252,7 +252,7 @@ body.no-scroll {
     bottom: 0;
     top: 620px;
     height: auto;
-    width: 450px;
+    width: 440px;
     object-fit: cover;
     z-index: 3;
     pointer-events: none;
@@ -845,8 +845,8 @@ body.no-scroll {
 .story-edge-rumah-adat {
     position: absolute;
     bottom: 0;
-    left: 0;
-    top: 577px;
+    left: -10;
+    top: 585px;
     height: auto;
     width: 450px;
     object-fit: cover;
@@ -917,8 +917,8 @@ body.no-scroll {
 .acara-edge-rumah-adat {
     position: absolute;
     bottom: 0;
-    left: 0;
-    top: 1080px;
+    left: -10;
+    top: 1075px;
     height: auto;
     width: 450px;
     object-fit: cover;
