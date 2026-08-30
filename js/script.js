@@ -29,54 +29,58 @@ document.addEventListener('DOMContentLoaded', function() {
     const coverScreen = document.getElementById('cover-screen');
     const floatingNav = document.getElementById('floating-nav');
     const musicContainer = document.getElementById('music-wrapper');
+    const btnAutoScroll = document.getElementById('btn-auto-scroll');
 
     if (btnOpen) {
         btnOpen.addEventListener('click', function() {
             document.body.classList.remove('no-scroll');
             coverScreen.classList.add('opened');
-            
+
             if (floatingNav) floatingNav.classList.remove('hide-nav');
             if (musicContainer) musicContainer.classList.remove('hide-nav');
 
             if (typeof MusicController !== 'undefined') {
                 MusicController.play();
             }
+
+            // Auto-scroll langsung aktif begitu undangan dibuka
+            startContinuousAutoScroll(btnAutoScroll);
         });
     }
 
-    // Auto scroll button listener
-    const btnAutoScroll = document.getElementById('btn-auto-scroll');
+    // Klik tombol auto-scroll = toggle manual (nyala/mati)
     if (btnAutoScroll) {
         btnAutoScroll.addEventListener('click', function() {
             toggleContinuousAutoScroll(this);
         });
     }
 
-    // Stop auto-scroll on manual user touch/scroll
-    ['wheel', 'touchstart', 'mousedown'].forEach(evt => {
-        window.addEventListener(evt, function() {
-            if (isAutoScrolling) {
-                stopContinuousAutoScroll();
-            }
-        }, { passive: true });
-    });
+    // Catatan: auto-scroll TIDAK lagi berhenti otomatis saat user
+    // scroll/sentuh/klik layar — hanya berhenti kalau tombol
+    // auto-scroll sendiri yang diklik (atau sudah sampai dasar halaman).
 
     initScrollObserver();
 });
+
+function startContinuousAutoScroll(btn) {
+    if (isAutoScrolling) return;
+
+    isAutoScrolling = true;
+    if (btn) btn.classList.add('scrolling');
+
+    autoScrollInterval = setInterval(() => {
+        window.scrollBy(0, 2);
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
+            stopContinuousAutoScroll();
+        }
+    }, 30);
+}
 
 function toggleContinuousAutoScroll(btn) {
     if (isAutoScrolling) {
         stopContinuousAutoScroll();
     } else {
-        isAutoScrolling = true;
-        if (btn) btn.classList.add('scrolling');
-        
-        autoScrollInterval = setInterval(() => {
-            window.scrollBy(0, 2);
-            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
-                stopContinuousAutoScroll();
-            }
-        }, 30);
+        startContinuousAutoScroll(btn);
     }
 }
 
