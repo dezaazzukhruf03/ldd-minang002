@@ -946,7 +946,7 @@ body.no-scroll {
     position: absolute;
     bottom: 0;
     left: 0px;
-    top: 1076px;
+    top: 1090px;
     height: auto;
     width: 450px;
     object-fit: cover;
@@ -1452,12 +1452,13 @@ body.no-scroll {
 .rsvp-edge-rumah-adat {
     position: absolute;
     bottom: 0;
-    top: 970px;
+    top: 990px;
     height: auto;
     width: 440px;
     object-fit: cover;
     z-index: -1;
     pointer-events: none;
+    opacity: 50%;
 }
 
 .footer {
