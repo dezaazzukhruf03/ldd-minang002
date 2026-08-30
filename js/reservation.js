@@ -9,9 +9,9 @@
   ===================================================== */
 
   const SCRIPT_URL =
-    "GANTI_DENGAN_URL_WEB_APP_GOOGLE_APPS_SCRIPT_KAMU";
+    "https://script.google.com/macros/s/AKfycbwrHji0oU0VPiLM7lhkhGMd53HvzZJplOXwqRYE-ox-z_f4rGo1FluF_EgG6mU6Bpc/exec";
 
-  const SHEET_NAME = "Ucapan";
+  const SHEET_NAME = "Sampel";
 
   /* -------------------------------
      ELEMEN (ID sesuai index.html project ini)
