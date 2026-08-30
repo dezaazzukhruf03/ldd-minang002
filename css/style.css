@@ -592,6 +592,9 @@ body.no-scroll {
     padding-bottom: 100px; /* ruang untuk floating-nav, dipindah dari
                                .main-content supaya footer tetap nempel
                                tanpa celah navy di bawahnya */
+    overflow: hidden; /* mengurung .rsvp-edge-rumah-adat supaya tidak
+                          pernah bisa "bocor" melewati batas bawah section
+                          ini ke dalam .footer, berapa pun nilai top-nya */
 }
 
 .section-header {
