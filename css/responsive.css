@@ -14,8 +14,7 @@
     }
 
     .countdown-item {
-        width: 52px;
-        height: 52px;
+        max-width: 62px;
     }
 
     .countdown-item span {
