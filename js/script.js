@@ -67,6 +67,8 @@ function startContinuousAutoScroll(btn) {
 
     isAutoScrolling = true;
     if (btn) btn.classList.add('scrolling');
+    const notice = document.getElementById('auto-scroll-notice');
+    if (notice) notice.classList.add('show');
 
     autoScrollInterval = setInterval(() => {
         window.scrollBy(0, 2);
@@ -89,6 +91,8 @@ function stopContinuousAutoScroll() {
     if (autoScrollInterval) clearInterval(autoScrollInterval);
     const btn = document.getElementById('btn-auto-scroll');
     if (btn) btn.classList.remove('scrolling');
+    const notice = document.getElementById('auto-scroll-notice');
+    if (notice) notice.classList.remove('show');
 }
 
 function copyToClipboard(text, btnElement) {

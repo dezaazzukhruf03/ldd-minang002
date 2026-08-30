@@ -466,9 +466,34 @@ body.no-scroll {
 }
 
 .auto-scroll-btn {
+    position: relative; /* anchor untuk .auto-scroll-notice */
     color: var(--accent-color);
     border-right: 1px solid rgba(255, 255, 255, 0.15);
     padding-right: 8px;
+}
+
+.auto-scroll-notice {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    line-height: 1.3;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+    display: none;
+    pointer-events: none;
+}
+
+.auto-scroll-notice.show {
+    display: block;
 }
 
 .auto-scroll-btn.scrolling {
@@ -625,6 +650,7 @@ body.no-scroll {
 .hero-card {
     width: 100%;
     color: var(--white);
+    margin-bottom: 28px; /* jarak antara kartu countdown dan kartu Akad/Resepsi di bawahnya */
 }
 
 .hero-card .section-title-script {
@@ -675,6 +701,7 @@ body.no-scroll {
     justify-content: center;
     align-items: center;
     border: 1px solid rgba(128, 0, 0, 0.25);
+    border-left: 4px solid var(--accent-color);
 }
 
 .countdown-item span {
@@ -749,6 +776,7 @@ body.no-scroll {
     border-radius: var(--border-radius);
     padding: 24px;
     box-shadow: var(--shadow-card);
+    border-left: 4px solid var(--accent-color);
     margin-bottom: 40px;
 }
 
@@ -941,6 +969,7 @@ body.no-scroll {
     text-align: center;
     box-shadow: var(--shadow-card);
     border: 1px solid rgba(128, 0, 0, 0.2);
+    border-left: 4px solid var(--accent-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1274,10 +1303,11 @@ body.no-scroll {
 .stat-box {
     flex: 1;
     background: var(--white);
-    padding: 12px;
+    padding: 12px 12px 12px 14px;
     border-radius: 12px;
     text-align: center;
     box-shadow: var(--shadow-card);
+    border-left: 4px solid var(--accent-color);
 }
 
 .stat-num {
@@ -1297,6 +1327,7 @@ body.no-scroll {
     padding: 20px;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-card);
+    border-left: 4px solid var(--accent-color);
     margin-bottom: 30px;
 }
 
@@ -1336,6 +1367,7 @@ body.no-scroll {
     padding: 20px;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-card);
+    border-left: 4px solid var(--accent-color);
 }
 
 .wishes-title {
