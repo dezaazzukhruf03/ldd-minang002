@@ -774,13 +774,52 @@ body.no-scroll {
     opacity: 20%;
 }
 
+/* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
+.mempelai-edge-image {
+    position: absolute;
+    top: -530px;
+    height: auto;
+    width: 90px;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
+}
+.mempelai-edge-image.left { 
+    left: -50px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.mempelai-edge-image.right { 
+    right: -50px;
+}
+.mempelai-edge-image.left2 { 
+    top:-183px;
+    left: -50px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.mempelai-edge-image.right2 { 
+    top: -183px;
+    right: -50px;
+}
+.mempelai-edge-image.left3 { 
+    top: 175px;
+    left: -50px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.mempelai-edge-image.right3 { 
+    top: 175px;
+    right: -50px;
+}
+
 .quran-quote {
+    position: relative;
     background: var(--white);
     border-radius: var(--border-radius);
     padding: 24px;
     box-shadow: var(--shadow-card);
     border-left: 4px solid var(--accent-color);
     margin-bottom: 40px;
+    z-index: 10;
 }
 
 .quote-icon {
@@ -886,6 +925,44 @@ body.no-scroll {
     opacity: 50%;
 }
 
+/* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
+.story-edge-image {
+    position: absolute;
+    top: -14px;
+    height: auto;
+    width: 90px;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
+}
+.story-edge-image.left { 
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.story-edge-image.right { 
+    right: -30px;
+}
+.story-edge-image.left2 { 
+    top: 353px;
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.story-edge-image.right2 { 
+    top: 353px;
+    right: -30px;
+}
+
+.story-edge-image.left3 { 
+    top: 720px;
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.story-edge-image.right3 { 
+    top: 720px;
+    right: -30px;
+}
+
 .story-cards {
     display: flex;
     flex-direction: column;
@@ -956,6 +1033,53 @@ body.no-scroll {
     z-index: -1;
     pointer-events: none;
     opacity: 50%;
+}
+
+/* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
+.acara-edge-image {
+    position: absolute;
+    top: -27px;
+    height: auto;
+    width: 90px;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
+}
+.acara-edge-image.left { 
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.acara-edge-image.right { 
+    right: -30px;
+}
+.acara-edge-image.left2 { 
+    top: 341px;
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.acara-edge-image.right2 { 
+    top: 341px;
+    right: -30px;
+}
+.acara-edge-image.left3 { 
+    top: 665px;
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.acara-edge-image.right3 { 
+    top: 665px;
+    right: -30px;
+}
+
+.acara-edge-image.left4 { 
+    top: 966px;
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.acara-edge-image.right4 { 
+    top: 966px;
+    right: -30px;
 }
 
 .event-cards {
@@ -1105,6 +1229,34 @@ body.no-scroll {
     opacity: 30%;
 }
 
+/* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
+.galeri-edge-image {
+    position: absolute;
+    top: -11px;
+    height: auto;
+    width: 90px;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
+}
+.galeri-edge-image.left { 
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.galeri-edge-image.right { 
+    right: -30px;
+}
+.galeri-edge-image.left2 { 
+    top: 313px;
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.galeri-edge-image.right2 { 
+    top: 313px;
+    right: -30px;
+}
+
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -1232,6 +1384,34 @@ body.no-scroll {
     z-index: -1;
     pointer-events: none;
     opacity: 30%;
+}
+
+/* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
+.gift-edge-image {
+    position: absolute;
+    top: 0px;
+    height: auto;
+    width: 90px;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
+}
+.gift-edge-image.left { 
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.gift-edge-image.right { 
+    right: -30px;
+}
+.gift-edge-image.left2 { 
+    top:348px;
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.gift-edge-image.right2 { 
+    top: 348px;
+    right: -30px;
 }
 
 .bank-cards {
@@ -1464,8 +1644,56 @@ body.no-scroll {
     opacity: 50%;
 }
 
+/* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
+.rsvp-edge-image {
+    position: absolute;
+    top: -55px;
+    height: auto;
+    width: 90px;
+    object-fit: cover;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 50%;
+}
+.rsvp-edge-image.left { 
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.rsvp-edge-image.right { 
+    right: -30px;
+}
+.rsvp-edge-image.left2 { 
+    top:292px;
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.rsvp-edge-image.right2 { 
+    top: 292px;
+    right: -30px;
+}
+
+.rsvp-edge-image.left3 { 
+    top:639px;
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.rsvp-edge-image.right3 { 
+    top: 639px;
+    right: -30px;
+}
+
+.rsvp-edge-image.left4 { 
+    top:963px;
+    left: -30px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.rsvp-edge-image.right4 { 
+    top: 963px;
+    right: -30px;
+}
+
 .footer {
-    padding: 100px 20px;
+    padding: 60px 20px;
     background: var(--primary-color);
     color: var(--white);
     border-top-left-radius: var(--border-radius);
@@ -1473,6 +1701,7 @@ body.no-scroll {
 }
 
 .footer-title {
+    margin-top: -30px;
     font-family: var(--font-script);
     font-size: 2.2rem;
     color: var(--accent-color);

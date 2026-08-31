@@ -4,6 +4,42 @@
 let autoScrollInterval = null;
 let isAutoScrolling = false;
 
+/* --------------------------------------------------------------------------
+   Cegah Zoom di iOS Safari
+   Sejak iOS 10, Safari SENGAJA mengabaikan "user-scalable=no" dan
+   "maximum-scale=1" di meta viewport (alasan aksesibilitas Apple) — jadi
+   walau HTML-nya sudah benar, iPhone tetap bisa pinch-zoom. Meta viewport
+   tetap dipertahankan untuk browser lain (Android/Chrome sudah menghormatinya),
+   tapi khusus iOS harus dicegah manual lewat JS: blokir gesture pinch
+   ("gesturestart"/"gesturechange") dan double-tap zoom.
+   -------------------------------------------------------------------------- */
+document.addEventListener('gesturestart', function (e) {
+    e.preventDefault();
+});
+document.addEventListener('gesturechange', function (e) {
+    e.preventDefault();
+});
+document.addEventListener('gestureend', function (e) {
+    e.preventDefault();
+});
+
+// Blokir pinch-zoom pakai 2 jari (touchmove dengan >1 titik sentuh)
+document.addEventListener('touchmove', function (e) {
+    if (e.touches.length > 1) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// Blokir double-tap zoom (dua ketuk cepat berturut-turut)
+let lastTouchEnd = 0;
+document.addEventListener('touchend', function (e) {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+        e.preventDefault();
+    }
+    lastTouchEnd = now;
+}, { passive: false });
+
 document.addEventListener('DOMContentLoaded', function() {
 
     if ('scrollRestoration' in history) {
