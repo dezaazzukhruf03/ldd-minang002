@@ -819,7 +819,10 @@ body.no-scroll {
     box-shadow: var(--shadow-card);
     border-left: 4px solid var(--accent-color);
     margin-bottom: 40px;
-    z-index: 10;
+    z-index: 20; /* dinaikkan di atas .couple-grid (z-index:10) — sebelumnya
+                    seri, dan .couple-grid menang karena posisinya lebih
+                    akhir di HTML, jadi dekorasi kiri-kanannya (yang digeser
+                    naik lewat top negatif) menimpa kartu ini */
 }
 
 .quote-icon {
