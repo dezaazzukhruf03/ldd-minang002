@@ -76,8 +76,14 @@
 
 /* ==========================================================================
    ENHANCED ANIMATIONS — Scroll Reveal, Stagger & Micro-interactions
-   Hooks into the existing .section.in-view class (already toggled by your
-   scroll-spy script) — no JS changes required.
+   Setiap ELEMEN individual (quran-quote, foto-frame, nama, groom-card,
+   bride-card, divider-heart, story-card, countdown-item, event-card,
+   gallery-item, atm-card, section-header) dapat class .in-view SENDIRI
+   dari animationObserver di script.js, tepat saat DIRINYA SENDIRI sudah
+   50% kelihatan di layar (threshold: 0.5) — bukan lagi ikut trigger
+   section/kartu lain di sebelahnya. transition-delay yang tersisa di
+   bawah cuma riak halus antar kartu kalau kebetulan sama-sama masuk
+   layar bersamaan (misal saat scroll cepat).
    ========================================================================== */
 
 /* Smoother section entrance curve */
@@ -90,12 +96,18 @@
 .section-header {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.section.in-view .section-header {
+.section-header.in-view {
     opacity: 1;
     transform: translateY(0);
+    transition-delay: 0.1s;
+}
+.section-header.out-view {
+    opacity: 0;
+    transform: translateY(-18px);
+    transition-delay: 0s;
 }
 
 /* Qur'an quote block */
@@ -104,54 +116,137 @@
     transform: translateY(20px) scale(0.98);
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
-.section.in-view .quran-quote {
+.quran-quote.in-view {
     opacity: 1;
     transform: translateY(0) scale(1);
+    transition-delay: 0s;
+}
+.quran-quote.out-view {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.97);
+    transition-delay: 0s;
 }
 
-/* Bride & Groom cards slide in from opposite sides, ampersand pops between */
-.bride-groom-card {
+/* --------------------------------------------------------------------------
+   Beranda (main-content) — foto utama masuk lebih dulu,
+   nama pasangan menyusul
+   -------------------------------------------------------------------------- */
+.foto-utama .photo-frame {
     opacity: 0;
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.3s ease;
+    transform: scale(0.85);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.couple-container .bride-groom-card:first-child { transform: translateX(-40px); }
-.couple-container .bride-groom-card:last-child { transform: translateX(40px); }
-.section.in-view .bride-groom-card {
+.foto-utama .photo-frame.in-view {
     opacity: 1;
-    transform: translateX(0);
-    transition-delay: 0.15s;
+    transform: scale(1);
+    transition-delay: 0.1s;
 }
-.section.in-view .bride-groom-card:last-child { transition-delay: 0.3s; }
-.bride-groom-card:hover {
+.foto-utama .photo-frame.out-view {
+    opacity: 0;
+    transform: scale(0.9);
+    transition-delay: 0s;
+}
+
+.bride-groom-text-beranda {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bride-groom-text-beranda.in-view {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+.bride-groom-text-beranda.out-view {
+    opacity: 0;
+    transform: translateY(-18px);
+    transition-delay: 0s;
+}
+
+/* --------------------------------------------------------------------------
+   Pasangan Mempelai — foto & nama animasi terpisah (bukan ikut kartu),
+   ikon hati muncul menyusul di tengah
+   -------------------------------------------------------------------------- */
+.groom-card,
+.bride-card {
+    /* Kartu sendiri tidak lagi fade/slide — cuma wadah layout.
+       Animasi masuknya sekarang di foto (.photo-frame) dan nama
+       (.bride-groom-text-mempelai) secara terpisah di bawah. */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.groom-card:hover,
+.bride-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 14px 30px rgba(128, 0, 0, 0.15);
 }
 
-.ampersand {
-    display: inline-block;
+.couple-grid .photo-frame {
     opacity: 0;
-    transform: scale(0.4) rotate(-15deg);
+    transform: scale(0.85);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.groom-card .photo-frame { transform: scale(0.85) translateX(-25px); }
+.bride-card .photo-frame { transform: scale(0.85) translateX(25px); }
+
+.couple-grid .photo-frame.in-view {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+    transition-delay: 0.1s;
+}
+.couple-grid .photo-frame.out-view {
+    opacity: 0;
+    transform: scale(0.9);
+    transition-delay: 0s;
+}
+
+.bride-groom-text-mempelai {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.bride-groom-text-mempelai.in-view {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.3s;
+}
+.bride-groom-text-mempelai.out-view {
+    opacity: 0;
+    transform: translateY(-16px);
+    transition-delay: 0s;
+}
+
+.divider-heart {
+    opacity: 0;
+    transform: scale(0.3) rotate(-25deg);
     transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.section.in-view .ampersand {
+.divider-heart.in-view {
     opacity: 1;
     transform: scale(1) rotate(0deg);
-    transition-delay: 0.4s;
+    transition-delay: 0.55s;
+}
+.divider-heart.out-view {
+    opacity: 0;
+    transform: scale(0.5) rotate(15deg);
+    transition-delay: 0s;
 }
 
 /* Story cards — staggered rise, lift on hover */
 .story-card {
     opacity: 0;
-    transform: translateY(35px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform: translateY(45px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
                 box-shadow 0.3s ease;
 }
-.section.in-view .story-card:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.10s; }
-.section.in-view .story-card:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
-.section.in-view .story-card:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.40s; }
+.story-card.in-view:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0s; }
+.story-card.in-view:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.18s; }
+.story-card.in-view:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.36s; }
+.story-card.out-view { opacity: 0; transform: translateY(-25px); transition-delay: 0s; }
 .story-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 28px rgba(128, 0, 0, 0.15);
@@ -163,16 +258,34 @@
     transform: scale(1.15) rotate(-6deg);
 }
 
+/* --------------------------------------------------------------------------
+   Rangkaian Acara — angka countdown muncul satu-satu, lalu kartu event
+   -------------------------------------------------------------------------- */
+.countdown-item {
+    opacity: 0;
+    transform: translateY(22px) scale(0.8);
+    transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.countdown-item.in-view:nth-child(1) { opacity: 1; transform: translateY(0) scale(1); transition-delay: 0s; }
+.countdown-item.in-view:nth-child(2) { opacity: 1; transform: translateY(0) scale(1); transition-delay: 0.12s; }
+.countdown-item.in-view:nth-child(3) { opacity: 1; transform: translateY(0) scale(1); transition-delay: 0.24s; }
+.countdown-item.in-view:nth-child(4) { opacity: 1; transform: translateY(0) scale(1); transition-delay: 0.36s; }
+.countdown-item.out-view { opacity: 0; transform: translateY(-14px) scale(0.85); transition-delay: 0s; }
+
 /* Event cards */
 .event-card {
     opacity: 0;
-    transform: translateY(35px);
-    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
                 box-shadow 0.3s ease;
 }
-.section.in-view .event-card:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.10s; }
-.section.in-view .event-card:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.25s; }
+.event-cards .event-card:nth-child(1) { transform: translateX(-35px); }
+.event-cards .event-card:nth-child(2) { transform: translateX(35px); }
+.event-card.in-view:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0s; }
+.event-card.in-view:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.15s; }
+.event-card.out-view:nth-child(1) { opacity: 0; transform: translateX(-25px); transition-delay: 0s; }
+.event-card.out-view:nth-child(2) { opacity: 0; transform: translateX(25px); transition-delay: 0s; }
 .event-card:hover {
     transform: translateY(-6px);
     box-shadow: 0 12px 28px rgba(128, 0, 0, 0.15);
@@ -181,13 +294,14 @@
 /* Gallery — staggered pop + smoother zoom */
 .gallery-item {
     opacity: 0;
-    transform: scale(0.85);
-    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: scale(0.75);
+    transition: opacity 0.65s ease, transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.section.in-view .gallery-item:nth-child(1) { opacity: 1; transform: scale(1); transition-delay: 0.05s; }
-.section.in-view .gallery-item:nth-child(2) { opacity: 1; transform: scale(1); transition-delay: 0.15s; }
-.section.in-view .gallery-item:nth-child(3) { opacity: 1; transform: scale(1); transition-delay: 0.25s; }
-.section.in-view .gallery-item:nth-child(4) { opacity: 1; transform: scale(1); transition-delay: 0.35s; }
+.gallery-item.in-view:nth-child(1) { opacity: 1; transform: scale(1); transition-delay: 0s; }
+.gallery-item.in-view:nth-child(2) { opacity: 1; transform: scale(1); transition-delay: 0.14s; }
+.gallery-item.in-view:nth-child(3) { opacity: 1; transform: scale(1); transition-delay: 0.28s; }
+.gallery-item.in-view:nth-child(4) { opacity: 1; transform: scale(1); transition-delay: 0.42s; }
+.gallery-item.out-view { opacity: 0; transform: scale(0.8); transition-delay: 0s; }
 .gallery-item img {
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -195,15 +309,16 @@
 /* Bank / gift cards — tilt-in entrance + shine sweep on hover */
 .atm-card {
     opacity: 0;
-    transform: translateY(30px) rotateX(-8deg);
-    transition: opacity 0.7s ease,
-                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform: translateY(40px) rotateX(-12deg);
+    transition: opacity 0.75s ease,
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
                 box-shadow 0.3s ease;
     position: relative;
     overflow: hidden;
 }
-.section.in-view .atm-card:nth-child(1) { opacity: 1; transform: translateY(0) rotateX(0); transition-delay: 0.10s; }
-.section.in-view .atm-card:nth-child(2) { opacity: 1; transform: translateY(0) rotateX(0); transition-delay: 0.30s; }
+.atm-card.in-view:nth-child(1) { opacity: 1; transform: translateY(0) rotateX(0); transition-delay: 0s; }
+.atm-card.in-view:nth-child(2) { opacity: 1; transform: translateY(0) rotateX(0); transition-delay: 0.22s; }
+.atm-card.out-view { opacity: 0; transform: translateY(-25px) rotateX(8deg); transition-delay: 0s; }
 .atm-card::after {
     content: '';
     position: absolute;
@@ -287,9 +402,6 @@
 }
 .ig-link:hover { transform: translateY(-2px); }
 
-.countdown-item {
-    transition: transform 0.3s ease;
-}
 .countdown-item:hover { transform: translateY(-3px); }
 
 /* Respect visitors who prefer reduced motion */

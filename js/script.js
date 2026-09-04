@@ -79,6 +79,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 MusicController.play();
             }
 
+            // Animasi foto utama & nama pasangan di Beranda dipicu DI SINI,
+            // bukan lewat scroll observer — soalnya section ini sudah
+            // "kelihatan" sejak halaman dimuat (cuma ketutup cover-screen),
+            // jadi kalau pakai scroll observer, animasinya keburu kelar
+            // duluan di belakang layar sebelum undangan sempat dibuka.
+            const heroPhoto = document.querySelector('.foto-utama .photo-frame');
+            const heroName = document.querySelector('.bride-groom-text-beranda');
+            if (heroPhoto) heroPhoto.classList.add('in-view');
+            if (heroName) heroName.classList.add('in-view');
+
             // Auto-scroll langsung aktif begitu undangan dibuka
             startContinuousAutoScroll(btnAutoScroll);
         });
@@ -163,10 +173,12 @@ function initScrollObserver() {
     const sections = document.querySelectorAll('.section');
     const navItems = document.querySelectorAll('.nav-item[href]');
 
+    // Observer #1 — hanya untuk menyalakan nav aktif (dot di floating-nav).
+    // Threshold-nya sengaja lebih longgar karena ini cuma indikator navigasi,
+    // bukan pemicu animasi.
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
                 const id = entry.target.getAttribute('id');
                 navItems.forEach(item => {
                     if (item.getAttribute('href') === `#${id}`) {
@@ -177,7 +189,76 @@ function initScrollObserver() {
                 });
             }
         });
-    }, { threshold: 0.2 });
+    }, {
+        threshold: 0.75,
+        rootMargin: '0px 0px -8% 0px'
+    });
 
     sections.forEach(section => sectionObserver.observe(section));
+
+    // Observer #2 — khusus animasi, per ELEMEN INDIVIDUAL (bukan per grup/
+    // section). Class .in-view ditambah saat elemen masuk melewati 75%
+    // terlihat, dan DICOPOT LAGI (jadi .out-view) saat turun di bawah 60%
+    // terlihat. Titik masuk & keluar SENGAJA dibuat beda (hysteresis),
+    // bukan angka yang sama persis — kalau sama persis, pas auto-scroll
+    // pelan elemen bisa "nongkrong" lama di titik itu dan bolak-balik
+    // nyebrang garisnya tiap frame, jadinya keliatan bergetar/flicker.
+    // Dengan jeda 0.75→0.6 ini, sekali sudah masuk dia baru dianggap
+    // keluar kalau memang benar-benar sudah turun jauh, bukan cuma geser dikit.
+    const ANIMATED_SELECTOR =
+        '.quran-quote, .section-header, ' +
+        '.couple-grid .photo-frame, .bride-groom-text-mempelai, ' +
+        '.divider-heart, ' +
+        '.story-card, .countdown-item, .event-card, .gallery-item, .atm-card';
+
+    const ENTER_THRESHOLD = 0.75;
+    const EXIT_THRESHOLD = 0.6;
+
+    const animationObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const ratio = entry.intersectionRatio;
+            if (ratio >= ENTER_THRESHOLD) {
+                entry.target.classList.add('in-view');
+                entry.target.classList.remove('out-view');
+            } else if (ratio <= EXIT_THRESHOLD && entry.target.classList.contains('in-view')) {
+                // Hanya mainkan animasi "keluar" kalau elemen ini memang
+                // sudah pernah kelihatan lebih dulu — supaya elemen yang
+                // dari awal memang belum pernah masuk layar (misal section
+                // paling bawah saat halaman baru dibuka) tidak langsung
+                // dikira "keluar" sebelum sempat masuk sama sekali.
+                entry.target.classList.remove('in-view');
+                entry.target.classList.add('out-view');
+            }
+            // ratio di antara EXIT_THRESHOLD dan ENTER_THRESHOLD: dibiarkan,
+            // ini "zona aman" yang mencegah flicker
+        });
+    }, {
+        threshold: [0, EXIT_THRESHOLD, ENTER_THRESHOLD, 1]
+    });
+
+    document.querySelectorAll(ANIMATED_SELECTOR).forEach(item => {
+        animationObserver.observe(item);
+    });
+
+    // Pengaman: kalau ada script lain (mis. calendar.js) yang me-render
+    // ulang elemen bertarget (ganti innerHTML, dsb), node lamanya lenyap
+    // dari observer dan node barunya tidak pernah terpantau. MutationObserver
+    // ini otomatis mendaftarkan ulang setiap elemen baru yang cocok selector
+    // di atas begitu muncul di DOM.
+    const domWatcher = new MutationObserver((mutations) => {
+        mutations.forEach(mutation => {
+            mutation.addedNodes.forEach(node => {
+                if (node.nodeType !== 1) return; // hanya elemen (bukan teks/komentar)
+                if (node.matches && node.matches(ANIMATED_SELECTOR)) {
+                    animationObserver.observe(node);
+                }
+                if (node.querySelectorAll) {
+                    node.querySelectorAll(ANIMATED_SELECTOR).forEach(child => {
+                        animationObserver.observe(child);
+                    });
+                }
+            });
+        });
+    });
+    domWatcher.observe(document.body, { childList: true, subtree: true });
 }

@@ -544,9 +544,12 @@ body.no-scroll {
        ke section lain */
 }
 
+/* Catatan: section TIDAK lagi diberi class .in-view lewat JS — animasi
+   sekarang dipicu per GRUP elemen (.quran-quote, .couple-grid, .story-cards,
+   dst, masing-masing dapat .in-view sendiri saat dirinya masuk viewport),
+   lihat animationObserver di script.js. Blok .section.in-view di bawah ini
+   sengaja dikosongkan/tidak dipakai lagi, aman dihapus kalau mau. */
 .section.in-view {
-    /* class ini tetap dipakai sebagai trigger animasi anak-anaknya
-       (section-header, story-card, dst di animasi.css), jangan dihapus dari JS */
 }
 
 /* ==========================================================================
@@ -865,6 +868,11 @@ body.no-scroll {
 }
 
 .groom-card, .bride-card {
+  position: relative;
+  z-index: 5; /* eksplisit, supaya menang di atas dekorasi mempelai-edge-*
+                 (z-index 1–2) walau .groom-card/.bride-card kini punya
+                 stacking context sendiri karena animasi transform di
+                 animasi.css — sama pola perbaikan dengan .quran-quote */
   flex: 1 1 0;
   min-width: 0;
   max-width: 170px;
@@ -1087,14 +1095,17 @@ body.no-scroll {
 
 .event-cards {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 12px;
     margin-bottom: 25px;
 }
 
 .event-card {
+    flex: 1 1 0;
+    min-width: 0;
     background: var(--white);
-    padding: 24px;
+    padding: 16px 12px;
     border-radius: var(--border-radius);
     text-align: center;
     box-shadow: var(--shadow-card);
@@ -1104,28 +1115,29 @@ body.no-scroll {
 }
 
 .event-icon {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: var(--accent-color);
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
 .event-type {
     font-family: var(--font-heading);
-    font-size: 1.3rem;
+    font-size: 1rem;
     color: var(--primary-color);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
+    line-height: 1.2;
 }
 
 .event-day {
     font-weight: 600;
-    font-size: 0.85rem;
+    font-size: 0.72rem;
     color: var(--text-dark);
 }
 
 .event-time {
-    font-size: 0.8rem;
+    font-size: 0.68rem;
     color: var(--text-muted);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .event-divider {
@@ -1134,14 +1146,14 @@ body.no-scroll {
     margin: 12px 0;
 }
 
-.event-venue { font-size: 0.85rem; color: var(--text-dark); }
-.event-address { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 15px; }
+.event-venue { font-size: 0.72rem; color: var(--text-dark); }
+.event-address { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 12px; }
 
 .btn-group {
     display: flex;
-    gap: 8px;
+    flex-direction: column;
+    gap: 6px;
     justify-content: center;
-    flex-wrap: wrap;
     margin-top: 10px;
 }
 
@@ -1198,8 +1210,8 @@ body.no-scroll {
 }
 
 .btn-sm {
-    padding: 8px 14px;
-    font-size: 0.75rem;
+    padding: 7px 8px;
+    font-size: 0.65rem;
 }
 
 .btn-block {
