@@ -3,6 +3,7 @@
  */
 let autoScrollInterval = null;
 let isAutoScrolling = false;
+let animationObserver = null;
 
 /* --------------------------------------------------------------------------
    Cegah Zoom di iOS Safari
@@ -88,6 +89,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const heroName = document.querySelector('.bride-groom-text-beranda');
             if (heroPhoto) heroPhoto.classList.add('in-view');
             if (heroName) heroName.classList.add('in-view');
+            // Daftarkan ke animationObserver SETELAH trigger awal manual ini,
+            // supaya kalau nanti discroll balik ke atas lalu turun lagi,
+            // dua elemen ini ikut kena out-view/in-view normal seperti
+            // elemen lain — bukan cuma sekali animasi terus diam selamanya.
+            if (animationObserver) {
+                if (heroPhoto) animationObserver.observe(heroPhoto);
+                if (heroName) animationObserver.observe(heroName);
+            }
 
             // Auto-scroll langsung aktif begitu undangan dibuka
             startContinuousAutoScroll(btnAutoScroll);
@@ -207,14 +216,14 @@ function initScrollObserver() {
     // keluar kalau memang benar-benar sudah turun jauh, bukan cuma geser dikit.
     const ANIMATED_SELECTOR =
         '.quran-quote, .section-header, ' +
-        '.couple-grid .photo-frame, .bride-groom-text-mempelai, ' +
+        '.couple-grid .photo-frame, .bride-groom-text-mempelai, .parents, ' +
         '.divider-heart, ' +
         '.story-card, .countdown-item, .event-card, .gallery-item, .atm-card';
 
     const ENTER_THRESHOLD = 0.75;
     const EXIT_THRESHOLD = 0.6;
 
-    const animationObserver = new IntersectionObserver((entries) => {
+    animationObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             const ratio = entry.intersectionRatio;
             if (ratio >= ENTER_THRESHOLD) {

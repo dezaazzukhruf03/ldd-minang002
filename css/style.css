@@ -520,7 +520,7 @@ body.no-scroll {
     width: 200px;
     height: 300px;
     z-index: 5;
-    opacity: 100%;
+    /* opacity dihapus — dikendalikan animasi.css (.in-view/.out-view) */
 }
 
 .bride-groom-text-beranda {
