@@ -167,7 +167,7 @@ body.no-scroll {
 /* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
 .cover-edge-image {
     position: absolute;
-    top: 0px;
+    top: 0%;
     height: auto;
     width: 90px;
     object-fit: cover;
@@ -182,27 +182,27 @@ body.no-scroll {
     right: -30px;
 }
 .cover-edge-image.left2 { 
-    top:372px;
+    top: 42%;
     left: -30px; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .cover-edge-image.right2 { 
-    top: 372px;
+    top: 42%;
     right: -30px;
 }
 .cover-edge-image.left3 { 
-    top:745px;
+    top: 84%;
     left: -30px; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .cover-edge-image.right3 { 
-    top: 745px;
+    top: 84%;
     right: -30px;
 }
 
 .cover-edge-kelapa {
     position: absolute;
-    top: 520px;
+    top: 60%;
     right: -60px;
     height: auto;
     width: 200px;
@@ -214,8 +214,8 @@ body.no-scroll {
 
 .cover-edge-ranting1 {
     position: absolute;
-    top: 180px;
-    right: -30px;
+    top: 30%;
+    right: -20px;
     height: auto;
     width: 150px;
     object-fit: cover;
@@ -223,21 +223,10 @@ body.no-scroll {
     opacity: 10%;
 }
 
-.cover-edge-ranting2 {
-    position: absolute;
-    top: 330px;
-    right: 10px;
-    height: auto;
-    width: 150px;
-    object-fit: cover;
-    z-index: 1;
-    opacity: 10%;
-        transform: scaleX(-1); /* Membalik gambar secara horizontal */
-}
 
 .cover-edge-pohon1-right {
     position: absolute;
-    top: 630px;
+    top: 74.1%;
     right: -10px;
     height: auto;
     width: 300px;
@@ -250,7 +239,7 @@ body.no-scroll {
 .cover-edge-rumah-adat {
     position: absolute;
     bottom: 0;
-    top: 620px;
+    top: 72%;
     height: auto;
     width: 440px;
     object-fit: cover;
@@ -260,7 +249,7 @@ body.no-scroll {
 
 .cover-edge-jam-gadang {
     position: absolute;
-    top: 300px;
+    top: 36%;
     left: -90px;
     height: auto;
     width: 350px;
@@ -744,7 +733,7 @@ body.no-scroll {
 
 .mempelai-edge-jam-gadang {
     position: absolute;
-    top: -45px;
+    top: -12%;
     left: 50%;
     transform: translateX(-50%);
     height: auto;
@@ -757,7 +746,7 @@ body.no-scroll {
 
 .mempelai-edge-semak-left {
     position: absolute;
-    top: 333px;
+    top: 80%;
     left: -80px;
     width: 230px;
     object-fit: cover;
@@ -768,7 +757,7 @@ body.no-scroll {
 
 .mempelai-edge-semak-right {
     position: absolute;
-    top: 333px;
+    top: 80%;
     right: -90px;
     width: 230px;
     object-fit: cover;
@@ -780,7 +769,7 @@ body.no-scroll {
 /* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
 .mempelai-edge-image {
     position: absolute;
-    top: -530px;
+    top: -147%;
     height: auto;
     width: 90px;
     object-fit: cover;
@@ -796,21 +785,30 @@ body.no-scroll {
     right: -50px;
 }
 .mempelai-edge-image.left2 { 
-    top:-183px;
+    top: -69.2%;
     left: -50px; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .mempelai-edge-image.right2 { 
-    top: -183px;
+    top: -69.2%;
     right: -50px;
 }
 .mempelai-edge-image.left3 { 
-    top: 175px;
+    top: 8.7%;
     left: -50px; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .mempelai-edge-image.right3 { 
-    top: 175px;
+    top: 8.7%;
+    right: -50px;
+}
+.mempelai-edge-image.left4 { 
+    top: 86.5%;
+    left: -50px; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.mempelai-edge-image.right4 { 
+    top: 86.5%;
     right: -50px;
 }
 
@@ -939,7 +937,7 @@ body.no-scroll {
 /* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
 .story-edge-image {
     position: absolute;
-    top: -14px;
+    top: 0%;
     height: auto;
     width: 90px;
     object-fit: cover;
@@ -955,22 +953,21 @@ body.no-scroll {
     right: -30px;
 }
 .story-edge-image.left2 { 
-    top: 353px;
+    top: 35.2%;
     left: -30px; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .story-edge-image.right2 { 
-    top: 353px;
+    top: 35.2%;
     right: -30px;
 }
-
 .story-edge-image.left3 { 
-    top: 720px;
+    top: 79%;
     left: -30px; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .story-edge-image.right3 { 
-    top: 720px;
+    top: 79%;
     right: -30px;
 }
 
@@ -1049,7 +1046,7 @@ body.no-scroll {
 /* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
 .acara-edge-image {
     position: absolute;
-    top: -27px;
+    top: 0%;
     height: auto;
     width: 90px;
     object-fit: cover;
@@ -1065,31 +1062,21 @@ body.no-scroll {
     right: -30px;
 }
 .acara-edge-image.left2 { 
-    top: 341px;
+    top: 37.5%;
     left: -30px; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .acara-edge-image.right2 { 
-    top: 341px;
+    top: 37.5%;
     right: -30px;
 }
 .acara-edge-image.left3 { 
-    top: 665px;
+    top: 75%;
     left: -30px; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .acara-edge-image.right3 { 
-    top: 665px;
-    right: -30px;
-}
-
-.acara-edge-image.left4 { 
-    top: 966px;
-    left: -30px; 
-    transform: scaleX(-1); /* Membalik gambar secara horizontal */
-}
-.acara-edge-image.right4 { 
-    top: 966px;
+    top: 75%;
     right: -30px;
 }
 
@@ -1247,7 +1234,7 @@ body.no-scroll {
 /* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
 .galeri-edge-image {
     position: absolute;
-    top: -11px;
+    top: 0%;
     height: auto;
     width: 90px;
     object-fit: cover;
@@ -1263,12 +1250,12 @@ body.no-scroll {
     right: -30px;
 }
 .galeri-edge-image.left2 { 
-    top: 313px;
+    top: 68.5%;
     left: -30px; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .galeri-edge-image.right2 { 
-    top: 313px;
+    top: 68.5%;
     right: -30px;
 }
 
@@ -1404,7 +1391,7 @@ body.no-scroll {
 /* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
 .gift-edge-image {
     position: absolute;
-    top: 0px;
+    top: 0%;
     height: auto;
     width: 90px;
     object-fit: cover;
@@ -1420,12 +1407,12 @@ body.no-scroll {
     right: -30px;
 }
 .gift-edge-image.left2 { 
-    top:348px;
+    top: 56%;
     left: -30px; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .gift-edge-image.right2 { 
-    top: 348px;
+    top: 56%;
     right: -30px;
 }
 
@@ -1662,7 +1649,7 @@ body.no-scroll {
 /* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
 .rsvp-edge-image {
     position: absolute;
-    top: -55px;
+    top: 0%;
     height: auto;
     width: 90px;
     object-fit: cover;
@@ -1678,32 +1665,30 @@ body.no-scroll {
     right: -30px;
 }
 .rsvp-edge-image.left2 { 
-    top:292px;
+    top:29.6%;
     left: -30px; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .rsvp-edge-image.right2 { 
-    top: 292px;
+    top: 29.6%;
     right: -30px;
 }
-
 .rsvp-edge-image.left3 { 
-    top:639px;
+    top:59.5%;
     left: -30px; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .rsvp-edge-image.right3 { 
-    top: 639px;
+    top: 59.5%;
     right: -30px;
 }
-
 .rsvp-edge-image.left4 { 
-    top:963px;
+    top:89.5%;
     left: -30px; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .rsvp-edge-image.right4 { 
-    top: 963px;
+    top: 89.5%;
     right: -30px;
 }
 
