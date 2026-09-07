@@ -769,7 +769,7 @@ body.no-scroll {
 /* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
 .mempelai-edge-image {
     position: absolute;
-    top: -147%;
+    top: -127%;
     height: auto;
     width: 90px;
     object-fit: cover;
