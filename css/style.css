@@ -1261,8 +1261,8 @@ body.no-scroll {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
 }
 
 .gallery-item {
