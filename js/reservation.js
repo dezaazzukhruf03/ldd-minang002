@@ -11,7 +11,7 @@
   const SCRIPT_URL =
     "https://script.google.com/macros/s/AKfycbwrHji0oU0VPiLM7lhkhGMd53HvzZJplOXwqRYE-ox-z_f4rGo1FluF_EgG6mU6Bpc/exec";
 
-  const SHEET_NAME = "Sampel";
+  const SHEET_NAME = "Lara-Deza";
 
   /* -------------------------------
      ELEMEN (ID sesuai index.html project ini)

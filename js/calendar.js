@@ -2,8 +2,8 @@
  * CALENDAR.JS - Countdown timer & Save to Calendar feature
  */
 function initCountdown() {
-    // Event Date: Saturday, 24 October 2026, 08:00 WIB
-    const targetDate = new Date('October 24, 2026 08:00:00').getTime();
+    // Event Date: Saturday, 24 October 2026, 09:00 WIB
+    const targetDate = new Date('October 24, 2026 09:00:00').getTime();
 
     const daysEl = document.getElementById('days');
     const hoursEl = document.getElementById('hours');
@@ -45,9 +45,9 @@ function initCountdown() {
             e.preventDefault();
             const googleCalUrl = "https://calendar.google.com/calendar/render?action=TEMPLATE" +
                 "&text=" + encodeURIComponent("Akad Nikah Lara & Deza") +
-                "&dates=20261024T010000Z/20261024T030000Z" +
+                "&dates=20261024T090000Z/20261024T110000Z" +
                 "&details=" + encodeURIComponent("Pernikahan Lara & Deza") +
-                "&location=" + encodeURIComponent("https://maps.app.goo.gl/X8atifHqncnZfFYd9");
+                "&location=" + encodeURIComponent("https://maps.app.goo.gl/vTm88gsPAKRjcth5A");
             window.open(googleCalUrl, '_blank');
         });
     }
@@ -60,7 +60,7 @@ function initCountdown() {
                 "&text=" + encodeURIComponent("Resepsi Pernikahan Lara & Deza") +
                 "&dates=20261024T040000Z/20261024T070000Z" +
                 "&details=" + encodeURIComponent("Resepsi Pernikahan Lara & Deza") +
-                "&location=" + encodeURIComponent("https://maps.app.goo.gl/X8atifHqncnZfFYd9");
+                "&location=" + encodeURIComponent("https://maps.app.goo.gl/vTm88gsPAKRjcth5A");
             window.open(googleCalUrl, '_blank');
         });
     }
