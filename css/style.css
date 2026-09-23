@@ -30,6 +30,7 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    touch-action: pan-x pan-y;
 }
 
 body {
@@ -42,6 +43,7 @@ body {
     min-height: 100vh;
     overflow-x: hidden;
     line-height: 1.6;
+    touch-action: pan-x pan-y;
 }
 
 body.no-scroll {
@@ -79,6 +81,19 @@ body.no-scroll {
 .preloader-content {
   text-align: center;
   padding: 20px;
+}
+
+.preloader-logo {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 20px;
+  display: block;
+  animation: preloaderSpin 1.8s linear infinite;
+}
+
+@keyframes preloaderSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .loading-text {
@@ -161,7 +176,7 @@ body.no-scroll {
     justify-content: center;
     align-items: center;
     position: relative;
-    z-index: 2;
+    z-index: 5;
 }
 
 /* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
@@ -341,6 +356,8 @@ body.no-scroll {
 }
 
 .btn-open {
+    position: relative;
+    z-index: 10;
     top: 10px;
     background: var(--primary-color);
     color: var(--gold);
