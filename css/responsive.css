@@ -50,6 +50,62 @@
     }
 }
 
+/* ==========================================================================
+   LAYAR PENDEK (misal iPhone SE 375x667, dan HP lain dengan tinggi < 700px)
+   Section "Beranda" tingginya ikut 100svh, tapi dekorasi (menara jam, motif
+   atas, dll) dan ukuran foto masih pakai px tetap + posisi persen — jadi
+   kalau tinggi layar jauh lebih pendek dari HP patokan (±852px), semuanya
+   jadi kelihatan numpuk/mepet. Breakpoint ini mengecilkan proporsinya
+   supaya tetap longgar di layar pendek.
+   ========================================================================== */
+@media screen and (max-height: 700px) {
+    .hero-section {
+        padding: 24px 24px 30px;
+    }
+
+    .foto-utama .photo-frame {
+        top: -30px;
+        width: 160px;
+        height: 230px;
+    }
+
+    .bride-groom-text-beranda {
+        font-size: 1.9rem;
+        margin: -12px 0 6px;
+    }
+
+    .cover-edge-rumah-adat {
+        top: 78%;
+        width: 360px;
+    }
+
+    .cover-edge-atas {
+        width: 380px;
+        top: -16px;
+    }
+
+    .cover-edge-jam-gadang {
+        top: 42%;
+        width: 290px;
+    }
+
+    /* Cover screen (layar pembuka sebelum tombol "Buka Undangan" diklik)
+       punya struktur dekorasi yang sama persis, jadi perlu penyesuaian
+       serupa supaya tombolnya tidak ikut mepet/numpuk juga */
+    .cover-screen {
+        padding: 36px 24px 28px;
+    }
+
+    .cover-oval-text {
+        padding: 50px 24px 30px;
+    }
+
+    .bride-groom-title {
+        font-size: 2.8rem;
+        margin: 6px 0;
+    }
+}
+
 /* Landscape mode or Tablet/Desktop wrapper styling */
 @media screen and (min-width: 451px) {
     :root {
