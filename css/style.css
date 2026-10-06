@@ -19,6 +19,13 @@
     --font-heading: 'Playfair Display', serif;
     --font-script: 'Alex Brush', cursive;
     --font-body: 'Montserrat', sans-serif;
+
+    /* Ukuran kanvas acuan untuk sistem "stage scaling" (dipakai di
+       .cover-content & .hero-stage) — ganti 2 angka ini kalau suatu saat
+       mau pindah HP acuan desain, semua dekorasi otomatis ikut menyesuaikan.
+       Nilai sekarang = ukuran layar HP acuan project ini (≈ iPhone 16 / Oppo A60). */
+    --stage-w: 393;
+    --stage-h: 852;
 }
 
 * {
@@ -133,12 +140,20 @@ body.no-scroll {
     height: 100svh;
     z-index: 1000;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 60px 24px 40px;
+    overflow: hidden;
     text-align: center;
     color: var(--text-dark);
+    /* background cadangan — tampil di celah atas/bawah kalau rasio
+       layar HP beda dari kanvas acuan 393x852, supaya tetap menyatu
+       dengan warna tema (bukan kelihatan "kotak kosong") */
+    background: linear-gradient(165deg, var(--primary-color) 0%, #3d0d0d 45%, #0f172a 100%);
+    /* container query: supaya cqw/cqh di .cover-content selalu mengacu
+       ke ukuran RENDER cover-screen sendiri (yang sudah dibatasi
+       max-width 450px di desktop), bukan ke lebar/tinggi layar mentah */
+    container-type: size;
+    container-name: cover-stage;
     transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
 }
 
@@ -168,15 +183,22 @@ body.no-scroll {
     z-index: -1;
 }
 
+/* STAGE: kanvas desain dikunci di ukuran acuan 393x852 (HP patokan awal
+   proyek ini), lalu seluruh kanvasnya di-scale UTUH (bukan reflow
+   per elemen) supaya proporsi & posisi tiap dekorasi SELALU identik
+   di semua ukuran HP — cuma beda besar-kecil tampilnya saja. */
 .cover-content {
-    width: 100%;
-    height: 100%;
+    width: calc(var(--stage-w) * 1px);
+    height: calc(var(--stage-h) * 1px);
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 60px 24px 40px;
     position: relative;
     z-index: 5;
+    transform: scale(min(calc(100cqw / (var(--stage-w) * 1px)), calc(100cqh / (var(--stage-h) * 1px))));
 }
 
 /* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
@@ -184,36 +206,28 @@ body.no-scroll {
     position: absolute;
     top: 0%;
     height: auto;
-    width: 90px;
+    width: 70%;
     object-fit: cover;
-    z-index: 2;
+    z-index: 6;
     pointer-events: none;
 }
-.cover-edge-image.left { 
-    left: -30px; 
+.cover-edge-image.left {
+    left: -30%; 
+    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+}
+.cover-edge-image.left2 {
+    top: 750px; 
+    left: -30%; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .cover-edge-image.right { 
-    right: -30px;
-}
-.cover-edge-image.left2 { 
-    top: 42%;
-    left: -30px; 
-    transform: scaleX(-1); /* Membalik gambar secara horizontal */
+    right: -30%;
 }
 .cover-edge-image.right2 { 
-    top: 42%;
-    right: -30px;
+    top: 750px;
+    right: -30%;
 }
-.cover-edge-image.left3 { 
-    top: 84%;
-    left: -30px; 
-    transform: scaleX(-1); /* Membalik gambar secara horizontal */
-}
-.cover-edge-image.right3 { 
-    top: 84%;
-    right: -30px;
-}
+
 
 .cover-edge-kelapa {
     position: absolute;
@@ -254,7 +268,7 @@ body.no-scroll {
 .cover-edge-rumah-adat {
     position: absolute;
     bottom: 0;
-    top: 72%;
+    top: 73%;
     height: auto;
     width: 440px;
     object-fit: cover;
@@ -276,11 +290,11 @@ body.no-scroll {
 
 .cover-edge-atas {
     position: absolute;
-    top: -20px;
+    top: 0%;
     height: auto;
-    width: 460px;
+    width: 120%;
     object-fit: cover;
-    z-index: 3;
+    z-index: 100;
     pointer-events: none;
 }
 
@@ -311,9 +325,9 @@ body.no-scroll {
 /* Kartu Oval Cover: menaungi judul, nama pasangan, tanggal, guest box & tombol */
 
 .cover-oval-text {
-    margin-top: 10px;
+    margin-top: 10%;
     position: relative;
-    z-index: 2;
+    z-index: 10;
     width: 100%;
     height: 100%;
     display: flex;
@@ -634,14 +648,36 @@ body.no-scroll {
 /* Hero Section - Full Screen Cover Photo */
 .hero-section {
     position: relative;
-    min-height: 100svh;
+    height: 100svh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    /* container query: cqw/cqh di .hero-stage mengacu ke ukuran render
+       section ini sendiri, bukan lebar/tinggi layar mentah.
+       container-type:size butuh tinggi PASTI, bukan min-height — karena
+       isi section ini sekarang selalu dikunci di dalam .hero-stage
+       (393x852 yang di-scale), section ini aman dipasang height tetap
+       tanpa risiko foto/teks kepotong. */
+    container-type: size;
+    container-name: hero-stage;
+}
+
+/* STAGE: sama persis prinsipnya dengan .cover-content — kanvas tetap
+   393x852 yang di-scale utuh, supaya posisi menara jam, motif, foto,
+   dan teks nama SELALU identik proporsinya di semua ukuran HP. */
+.hero-stage {
+    width: calc(var(--stage-w) * 1px);
+    height: calc(var(--stage-h) * 1px);
+    flex-shrink: 0;
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 40px 24px 50px;
-    text-align: center;
-    overflow: hidden;
+    transform: scale(min(calc(100cqw / (var(--stage-w) * 1px)), calc(100cqh / (var(--stage-h) * 1px))));
 }
 
 .hero-bg {
@@ -657,6 +693,107 @@ body.no-scroll {
     inset: 0;
     background: linear-gradient(to bottom, rgba(15,23,42,0.05) 0%, rgba(15,23,42,0.55) 65%, rgba(15,23,42,0.92) 100%);
     z-index: -1;
+}
+
+/* --------------------------------------------------------------------------
+   Dekorasi khusus Beranda (#beranda / .hero-stage) — DIPISAH dari
+   cover-edge-* milik layar Cover, supaya bisa diatur sendiri-sendiri
+   tanpa saling memengaruhi. Nilai di bawah ini masih sama persis dengan
+   cover-edge-* sebagai titik awal — tinggal diubah angkanya sesuai
+   kebutuhan tampilan Beranda.
+   -------------------------------------------------------------------------- */
+.beranda-edge-image {
+    position: absolute;
+    top: 0%;
+    height: auto;
+    width: 70%;
+    object-fit: cover;
+    z-index: 6;
+    pointer-events: none;
+}
+.beranda-edge-image.left {
+    left: -30%;
+    transform: scaleX(-1);
+}
+.beranda-edge-image.right {
+    right: -30%;
+}
+.beranda-edge-image.left2 {
+    top: 94%;
+    left: -30%;
+    transform: scaleX(-1);
+}
+.beranda-edge-image.right2 {
+    top: 94%;
+    right: -30%;
+}
+
+.beranda-edge-kelapa {
+    position: absolute;
+    top: 60%;
+    right: -60px;
+    height: auto;
+    width: 200px;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 10%;
+}
+
+.beranda-edge-ranting1 {
+    position: absolute;
+    top: 30%;
+    right: -20px;
+    height: auto;
+    width: 150px;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 10%;
+}
+
+.beranda-edge-pohon1-right {
+    position: absolute;
+    top: 74.1%;
+    right: -10px;
+    height: auto;
+    width: 300px;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 20%;
+}
+
+.beranda-edge-rumah-adat {
+    position: absolute;
+    bottom: 0;
+    top: 80%;
+    height: auto;
+    width: 440px;
+    object-fit: cover;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.beranda-edge-jam-gadang {
+    position: absolute;
+    top: 36%;
+    left: -90px;
+    height: auto;
+    width: 350px;
+    object-fit: cover;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 30%;
+}
+
+.beranda-edge-atas {
+    position: absolute;
+    top: -10%;
+    height: auto;
+    width: 150%;
+    object-fit: cover;
+    z-index: 100;
+    pointer-events: none;
 }
 
 .hero-card {
@@ -750,7 +887,7 @@ body.no-scroll {
 
 .mempelai-edge-jam-gadang {
     position: absolute;
-    top: -12%;
+    top: -5%;
     left: 50%;
     transform: translateX(-50%);
     height: auto;
@@ -786,47 +923,29 @@ body.no-scroll {
 /* Gambar dekorasi kiri & kanan cover screen (disiapkan sendiri oleh pengguna) */
 .mempelai-edge-image {
     position: absolute;
-    top: -127%;
+    top: -130%;
     height: auto;
-    width: 90px;
+    width: 70%;
     object-fit: cover;
     z-index: -1;
     pointer-events: none;
     opacity: 50%;
 }
 .mempelai-edge-image.left { 
-    left: -50px; 
+    left: -35%; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .mempelai-edge-image.right { 
-    right: -50px;
+    right: -35%;
 }
 .mempelai-edge-image.left2 { 
-    top: -69.2%;
-    left: -50px; 
+    top: 24%;
+    left: -35%; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .mempelai-edge-image.right2 { 
-    top: -69.2%;
-    right: -50px;
-}
-.mempelai-edge-image.left3 { 
-    top: 8.7%;
-    left: -50px; 
-    transform: scaleX(-1); /* Membalik gambar secara horizontal */
-}
-.mempelai-edge-image.right3 { 
-    top: 8.7%;
-    right: -50px;
-}
-.mempelai-edge-image.left4 { 
-    top: 86.5%;
-    left: -50px; 
-    transform: scaleX(-1); /* Membalik gambar secara horizontal */
-}
-.mempelai-edge-image.right4 { 
-    top: 86.5%;
-    right: -50px;
+    top: 24%;
+    right: -35%;
 }
 
 .quran-quote {
@@ -943,7 +1062,7 @@ body.no-scroll {
     position: absolute;
     bottom: 0;
     left: 0px;
-    top: 598px;
+    top: 75%;
     height: auto;
     width: 450px;
     object-fit: cover;
@@ -957,36 +1076,27 @@ body.no-scroll {
     position: absolute;
     top: 0%;
     height: auto;
-    width: 90px;
+    width: 70%;
     object-fit: cover;
     z-index: -1;
     pointer-events: none;
     opacity: 50%;
 }
 .story-edge-image.left { 
-    left: -30px; 
+    left: -30%; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .story-edge-image.right { 
-    right: -30px;
+    right: -30%;
 }
 .story-edge-image.left2 { 
-    top: 35.2%;
-    left: -30px; 
+    top: 70%;
+    left: -30%; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .story-edge-image.right2 { 
-    top: 35.2%;
-    right: -30px;
-}
-.story-edge-image.left3 { 
-    top: 79%;
-    left: -30px; 
-    transform: scaleX(-1); /* Membalik gambar secara horizontal */
-}
-.story-edge-image.right3 { 
-    top: 79%;
-    right: -30px;
+    top: 70%;
+    right: -30%;
 }
 
 .story-cards {
@@ -1066,36 +1176,27 @@ body.no-scroll {
     position: absolute;
     top: 0%;
     height: auto;
-    width: 90px;
+    width: 70%;
     object-fit: cover;
     z-index: -1;
     pointer-events: none;
     opacity: 50%;
 }
 .acara-edge-image.left { 
-    left: -30px; 
+    left: -30%; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .acara-edge-image.right { 
-    right: -30px;
+    right: -30%;
 }
 .acara-edge-image.left2 { 
-    top: 37.5%;
-    left: -30px; 
+    top: 70%;
+    left: -30%; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .acara-edge-image.right2 { 
-    top: 37.5%;
-    right: -30px;
-}
-.acara-edge-image.left3 { 
-    top: 75%;
-    left: -30px; 
-    transform: scaleX(-1); /* Membalik gambar secara horizontal */
-}
-.acara-edge-image.right3 { 
-    top: 75%;
-    right: -30px;
+    top: 70%;
+    right: -30%;
 }
 
 .event-cards {
@@ -1254,27 +1355,27 @@ body.no-scroll {
     position: absolute;
     top: 0%;
     height: auto;
-    width: 90px;
+    width: 70%;
     object-fit: cover;
     z-index: -1;
     pointer-events: none;
     opacity: 50%;
 }
 .galeri-edge-image.left { 
-    left: -30px; 
+    left: -30%; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .galeri-edge-image.right { 
-    right: -30px;
+    right: -30%;
 }
 .galeri-edge-image.left2 { 
     top: 68.5%;
-    left: -30px; 
+    left: -30%; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .galeri-edge-image.right2 { 
     top: 68.5%;
-    right: -30px;
+    right: -30%;
 }
 
 .gallery-grid {
@@ -1384,7 +1485,7 @@ body.no-scroll {
 
 .gift-edge-jam-gadang {
     position: absolute;
-    top: 120px;
+    top: 22%;
     left: -120px;
     height: auto;
     width: 350px;
@@ -1411,27 +1512,18 @@ body.no-scroll {
     position: absolute;
     top: 0%;
     height: auto;
-    width: 90px;
+    width: 70%;
     object-fit: cover;
     z-index: -1;
     pointer-events: none;
     opacity: 50%;
 }
 .gift-edge-image.left { 
-    left: -30px; 
+    left: -30%; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .gift-edge-image.right { 
-    right: -30px;
-}
-.gift-edge-image.left2 { 
-    top: 56%;
-    left: -30px; 
-    transform: scaleX(-1); /* Membalik gambar secara horizontal */
-}
-.gift-edge-image.right2 { 
-    top: 56%;
-    right: -30px;
+    right: -30%;
 }
 
 .bank-cards {
@@ -1655,7 +1747,7 @@ body.no-scroll {
 .rsvp-edge-rumah-adat {
     position: absolute;
     bottom: 0;
-    top: 1010px;
+    top: 80%;
     height: auto;
     width: 440px;
     object-fit: cover;
@@ -1669,45 +1761,27 @@ body.no-scroll {
     position: absolute;
     top: 0%;
     height: auto;
-    width: 90px;
+    width: 70%;
     object-fit: cover;
     z-index: -1;
     pointer-events: none;
     opacity: 50%;
 }
 .rsvp-edge-image.left { 
-    left: -30px; 
+    left: -30%; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .rsvp-edge-image.right { 
-    right: -30px;
+    right: -30%;
 }
 .rsvp-edge-image.left2 { 
-    top:29.6%;
-    left: -30px; 
+    top:65%;
+    left: -30%; 
     transform: scaleX(-1); /* Membalik gambar secara horizontal */
 }
 .rsvp-edge-image.right2 { 
-    top: 29.6%;
-    right: -30px;
-}
-.rsvp-edge-image.left3 { 
-    top:59.5%;
-    left: -30px; 
-    transform: scaleX(-1); /* Membalik gambar secara horizontal */
-}
-.rsvp-edge-image.right3 { 
-    top: 59.5%;
-    right: -30px;
-}
-.rsvp-edge-image.left4 { 
-    top:89.5%;
-    left: -30px; 
-    transform: scaleX(-1); /* Membalik gambar secara horizontal */
-}
-.rsvp-edge-image.right4 { 
-    top: 89.5%;
-    right: -30px;
+    top: 65%;
+    right: -30%;
 }
 
 .footer {
