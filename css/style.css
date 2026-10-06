@@ -537,8 +537,8 @@ body.no-scroll {
 
 .foto-utama .photo-frame {
     top: -50px;
-    width: 200px;
-    height: 300px;
+    width: 250px;
+    height: 400px;
     z-index: 5;
     /* opacity dihapus — dikendalikan animasi.css (.in-view/.out-view) */
 }
