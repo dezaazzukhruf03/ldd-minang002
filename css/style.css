@@ -186,7 +186,10 @@ body.no-scroll {
 /* STAGE: kanvas desain dikunci di ukuran acuan 393x852 (HP patokan awal
    proyek ini), lalu seluruh kanvasnya di-scale UTUH (bukan reflow
    per elemen) supaya proporsi & posisi tiap dekorasi SELALU identik
-   di semua ukuran HP — cuma beda besar-kecil tampilnya saja. */
+   di semua ukuran HP — cuma beda besar-kecil tampilnya saja.
+   z-index DINAIKKAN jadi 8 — di atas .cover-edge-image (z-index 6) —
+   supaya SELURUH isi kanvas ini (termasuk cover-edge-atas & rumah-adat
+   di dalamnya) otomatis di depan motif kiri-kanan. */
 .cover-content {
     width: calc(var(--stage-w) * 1px);
     height: calc(var(--stage-h) * 1px);
@@ -197,7 +200,7 @@ body.no-scroll {
     align-items: center;
     padding: 60px 24px 40px;
     position: relative;
-    z-index: 5;
+    z-index: 8;
     transform: scale(min(calc(100cqw / (var(--stage-w) * 1px)), calc(100cqh / (var(--stage-h) * 1px))));
 }
 
@@ -265,14 +268,17 @@ body.no-scroll {
     opacity: 20%;
 }
 
+/* cover-edge-rumah-adat & cover-edge-atas: z-index di bawah ini LOKAL
+   terhadap .cover-content (yang sudah diangkat ke z-index 8) — disamakan
+   nilainya (50) sesuai permintaan "setara", dan ada di bawah cover-oval-text */
 .cover-edge-rumah-adat {
     position: absolute;
     bottom: 0;
-    top: 73%;
+    top: 74%;
     height: auto;
     width: 440px;
     object-fit: cover;
-    z-index: 3;
+    z-index: 50;
     pointer-events: none;
 }
 
@@ -294,7 +300,7 @@ body.no-scroll {
     height: auto;
     width: 120%;
     object-fit: cover;
-    z-index: 100;
+    z-index: 50;
     pointer-events: none;
 }
 
@@ -322,12 +328,13 @@ body.no-scroll {
     color: var(--white);
 }
 
-/* Kartu Oval Cover: menaungi judul, nama pasangan, tanggal, guest box & tombol */
-
+/* Kartu Oval Cover: menaungi judul, nama pasangan, tanggal, guest box & tombol.
+   z-index 150 — di atas cover-edge-atas/rumah-adat (z-index 50 lokal di
+   .cover-content yang sama) — supaya teks & tombol SELALU paling depan. */
 .cover-oval-text {
     margin-top: 10%;
     position: relative;
-    z-index: 10;
+    z-index: 150;
     width: 100%;
     height: 100%;
     display: flex;
@@ -528,7 +535,7 @@ body.no-scroll {
 
 .foto-utama {
   position: relative;
-  z-index: 10;
+  z-index: 150;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -666,7 +673,10 @@ body.no-scroll {
 
 /* STAGE: sama persis prinsipnya dengan .cover-content — kanvas tetap
    393x852 yang di-scale utuh, supaya posisi menara jam, motif, foto,
-   dan teks nama SELALU identik proporsinya di semua ukuran HP. */
+   dan teks nama SELALU identik proporsinya di semua ukuran HP.
+   z-index DINAIKKAN jadi 8 — di atas .beranda-edge-image (z-index 6) —
+   supaya beranda-edge-atas & rumah-adat di dalamnya otomatis di depan
+   motif kiri-kanan. */
 .hero-stage {
     width: calc(var(--stage-w) * 1px);
     height: calc(var(--stage-h) * 1px);
@@ -677,6 +687,7 @@ body.no-scroll {
     justify-content: center;
     align-items: center;
     padding: 40px 24px 50px;
+    z-index: 8;
     transform: scale(min(calc(100cqw / (var(--stage-w) * 1px)), calc(100cqh / (var(--stage-h) * 1px))));
 }
 
@@ -698,9 +709,10 @@ body.no-scroll {
 /* --------------------------------------------------------------------------
    Dekorasi khusus Beranda (#beranda / .hero-stage) — DIPISAH dari
    cover-edge-* milik layar Cover, supaya bisa diatur sendiri-sendiri
-   tanpa saling memengaruhi. Nilai di bawah ini masih sama persis dengan
-   cover-edge-* sebagai titik awal — tinggal diubah angkanya sesuai
-   kebutuhan tampilan Beranda.
+   tanpa saling memengaruhi.
+   z-index di bawah ini LOKAL terhadap .hero-stage (sudah diangkat ke
+   z-index 8): beranda-edge-atas & rumah-adat disamakan (50), dan
+   foto-utama (z-index 150, lihat di atas) ada paling depan dari semua.
    -------------------------------------------------------------------------- */
 .beranda-edge-image {
     position: absolute;
@@ -770,7 +782,7 @@ body.no-scroll {
     height: auto;
     width: 440px;
     object-fit: cover;
-    z-index: 3;
+    z-index: 50;
     pointer-events: none;
 }
 
@@ -792,7 +804,7 @@ body.no-scroll {
     height: auto;
     width: 150%;
     object-fit: cover;
-    z-index: 100;
+    z-index: 50;
     pointer-events: none;
 }
 
@@ -1062,7 +1074,7 @@ body.no-scroll {
     position: absolute;
     bottom: 0;
     left: 0px;
-    top: 76%;
+    top: 77%;
     height: auto;
     width: 450px;
     object-fit: cover;
@@ -1162,7 +1174,7 @@ body.no-scroll {
     position: absolute;
     bottom: 0;
     left: 0px;
-    top: 1105px;
+    top: 77%;
     height: auto;
     width: 450px;
     object-fit: cover;
